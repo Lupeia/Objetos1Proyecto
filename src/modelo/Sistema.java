@@ -9,14 +9,12 @@ public class Sistema {
 
     private List<Torneos> torneo;
     private List<Equipos> equipos;
-    private List<Persona> personas;
     private List<Jugadores> jugadores;
     private List<Entrenadores> entrenadores;
 
     public Sistema() {
         this.torneo = new ArrayList<>();
         this.equipos = new ArrayList<>();
-        this.personas = new ArrayList<>();
         this.jugadores = new ArrayList<>();
         this.entrenadores = new ArrayList<>();
     }
@@ -37,14 +35,6 @@ public class Sistema {
         this.equipos = equipos;
     }
 
-    public List<Persona> getPersona() {
-        return personas;
-    }
-
-    public void setPersona(List<Persona> persona) {
-        this.personas = persona;
-    }
-
     public List<Jugadores> getJugadores() {
         return jugadores;
     }
@@ -62,35 +52,7 @@ public class Sistema {
     }
 
 
-    public boolean agregarPersona (String nombre, String apellido, long dni, LocalDate fechaNacimiento) throws Exception{
-
-        //AGREGAR VALIDACION DE DNI PARA QUE NO HAYA DNIS REPETIDOS
-
-        int indice = 0;
-        boolean encontrado = false;
-
-        while (indice < personas.size() && !encontrado){
-
-            if(personas.get(indice).dni == dni)throw new Exception("ERROR, DNI registrado");
-            encontrado = true;
-        }
-
-       int id = 0;
-
-       if(personas.size() > 0){
-
-           int ultimoId = personas.size()-1;
-           Persona p = personas.get(ultimoId);
-           id = p.getId();
-
-       }
-
-       Persona nueva = new Persona(id + 1, nombre, apellido, dni, fechaNacimiento);
-       return personas.add(nueva);
-    }
-
-
-    public boolean agregarJugador (int idPersona, String nombre, String apellido, long dni, LocalDate fechaNacimiento,
+    public boolean agregarJugador (String nombre, String apellido, long dni, LocalDate fechaNacimiento,
                                    float estatura, float peso, String posicion, int numeroCamiseta) throws Exception{
 
        //AGREGAR VALIDACION DE DNIS PARA QUE NO HAYA JUGADORES CON DNIS DUPLICADOS
@@ -105,12 +67,30 @@ public class Sistema {
             encontrado = true;
         }
 
-       int nuevoId = jugadores.size() + 1;
-       Jugadores nuevo = new Jugadores(idPersona, nombre, apellido, dni, fechaNacimiento, nuevoId, estatura, peso, posicion, numeroCamiseta);
+        int id = 1;
 
-       return jugadores.add(nuevo);
+        if(jugadores.size() < 0){
+
+            id = jugadores.get(jugadores.size()-1).getId();
+
+        }
+
+       return jugadores.add(new Jugadores(id, nombre, apellido, dni, fechaNacimiento, estatura, peso, posicion, numeroCamiseta));
 
     }
+
+    public boolean eliminarJugadores(int id){
+
+        Jugadores AEliminar = traerJugador(id);
+
+        if(AEliminar == null){
+            return false;
+        }
+
+        return jugadores.remove(AEliminar);
+
+    }
+
 
     public Jugadores traerJugador (int idJugador){
 
@@ -136,7 +116,7 @@ public class Sistema {
     }
 
 
-    public boolean agregarEntrenador (int idPersona, String nombre, String apellido, long dni, LocalDate fechaNacimiento,
+    public boolean agregarEntrenador (String nombre, String apellido, long dni, LocalDate fechaNacimiento,
                                       int EstrategiaFavorita) throws Exception{
 
         //AGREGAR VALIDACION DE DNIS PARA QUE NO HAYA ENTRENADORES CON DNIS DUPLICADOS
@@ -152,14 +132,32 @@ public class Sistema {
         }
 
 
-        int nuevoId = entrenadores.size() + 1;
-        Entrenadores nuevo = new Entrenadores(idPersona, nombre, apellido, dni, fechaNacimiento, nuevoId, EstrategiaFavorita);
+        int id = 1;
 
-        return entrenadores.add(nuevo);
+        if(entrenadores.size() < 0) {
+
+
+            id = entrenadores.get(entrenadores.size()-1).getId()+1;
+
+        }
+
+        return entrenadores.add(new Entrenadores(id, nombre, apellido, dni, fechaNacimiento, EstrategiaFavorita));
+    }
+
+    public boolean eliminarEntrenadores(int id){
+
+    Entrenadores Aeliminar = traerEntrenador(id);
+
+    if(Aeliminar == null){
+
+        return false;
+    }
+
+    return entrenadores.remove(Aeliminar);
 
     }
 
-    public Entrenadores traerEntrenador (int idEntrenador){
+    public Entrenadores traerEntrenador (int id){
 
         int indice = 0;
         boolean encontrado = false;
@@ -167,7 +165,7 @@ public class Sistema {
 
         while (indice < entrenadores.size() && !encontrado){
 
-            if(entrenadores.get(indice).getId() == idEntrenador){
+            if(entrenadores.get(indice).getId() == id){
 
                 buscado = entrenadores.get(indice);
                 encontrado = true;
@@ -191,6 +189,20 @@ public class Sistema {
         int nuevoId = equipos.size() + 1;
         Equipos nueva = new Equipos(nuevoId, codigo, nombreEquipo, entrenador);
         return equipos.add(nueva);
+
+    }
+
+    public boolean eliminarEquipo (int id){
+
+         Equipos aEliminar = traerEquipos(id);
+
+         if(aEliminar == null){
+
+             return false;
+
+         }
+
+         return equipos.remove(aEliminar);
 
     }
 
@@ -224,6 +236,18 @@ public class Sistema {
 
         return torneo.add(nuevo);
 
+    }
+
+    public boolean eliminarTorneo (int id){
+
+        Torneos aEliminar = traerTorneos(id);
+
+        if(aEliminar == null){
+
+            return false;
+        }
+
+        return torneo.remove(aEliminar);
     }
 
     public Torneos traerTorneos (int idTorneos){

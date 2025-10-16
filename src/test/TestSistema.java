@@ -13,10 +13,23 @@ public class TestSistema {
 
         try{
 
-            sistema.agregarPersona("Milagros", "Cannabis", 45741247, LocalDate.of(2004,10,01));
-            sistema.getPersona().forEach(System.out::println);
+            sistema.agregarJugador("Milagros", "Quinteros", 45742189, LocalDate.of(2004,7, 30), 1.68f, 54f, "central", 10);
+            sistema.agregarJugador("Miriano", "Moreno", 47841235, LocalDate.of(2000,9, 17), 1.74f, 70f, "central", 7);
+            sistema.agregarJugador("Miriam", "Azgurra", 49745123, LocalDate.of(2001,10, 27), 1.65f, 64f, "defensor", 9);
+            sistema.agregarJugador("Matias", "Pucheta", 46875324, LocalDate.of(2006,4, 8), 1.80f, 73f, "defensor", 17);
+            sistema.agregarJugador("Wanda", "Richetti", 44985623, LocalDate.of(2002,4, 25), 1.61f, 65f, "defensor", 19);
+            //sistema.getJugadores().forEach(System.out::println);
 
-            sistema.agregarJugador(1, "Milagros", "Cannabis", 45741247, LocalDate.of(2004,10,01), 1.56f, 45f, "centro", 10);
+            System.out.println(sistema.getJugadores() + "\n");
+
+            sistema.agregarEntrenador("Gustavo", "Serati", 267451101, LocalDate.of(1989, 5, 5), 3);
+            sistema.agregarEntrenador("Julieta", "Palvov", 2237498, LocalDate.of(1990, 10, 14), 7);
+            sistema.agregarEntrenador("Juan", "Natalan", 29945121, LocalDate.of(1995, 2, 26), 9);
+            //sistema.getEntrenadores().forEach(System.out::println);
+
+            sistema.agregarEquipo("ASV", "Luciernagas", sistema.traerEntrenador(1));
+            sistema.agregarEquipo("TWQ", "Linces", sistema.traerEntrenador(2));
+            sistema.agregarEquipo("PSM", "Lunaticos", sistema.traerEntrenador(3));
 
 
         } catch (Exception e) {

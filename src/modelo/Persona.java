@@ -3,7 +3,7 @@ package modelo;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Persona {
+public abstract class Persona {
 
     protected int id;
     protected String nombre;

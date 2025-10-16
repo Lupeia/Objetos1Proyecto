@@ -3,32 +3,19 @@ package modelo;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Jugadores extends Persona{
+public class Jugadores extends Persona {
 
-    private Persona p;
-    private int id;
     private float estatura;
     private float peso;
     private String posicion;
     private int nCamiseta;
 
-    public Jugadores(int id, String nombre, String apellido, long dni, LocalDate fechaNacimiento, int id1, float estatura, float peso, String posicion, int nCamiseta) {
+    public Jugadores(int id, String nombre, String apellido, long dni, LocalDate fechaNacimiento,float estatura, float peso, String posicion, int nCamiseta) {
         super(id, nombre, apellido, dni, fechaNacimiento);
-        this.id = id1;
         this.estatura = estatura;
         this.peso = peso;
         this.posicion = posicion;
         this.nCamiseta = nCamiseta;
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
     }
 
     public float getEstatura() {
@@ -68,14 +55,13 @@ public class Jugadores extends Persona{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Jugadores jugadores = (Jugadores) o;
-        return id == jugadores.id && Float.compare(estatura, jugadores.estatura) == 0 && Float.compare(peso, jugadores.peso) == 0 && nCamiseta == jugadores.nCamiseta && Objects.equals(posicion, jugadores.posicion);
+        return Float.compare(estatura, jugadores.estatura) == 0 && Float.compare(peso, jugadores.peso) == 0 && nCamiseta == jugadores.nCamiseta && Objects.equals(posicion, jugadores.posicion);
     }
 
     @Override
     public String toString() {
         return "Jugadores{" +
-                "id=" + id +
-                ", estatura=" + estatura +
+                "estatura=" + estatura +
                 ", peso=" + peso +
                 ", posicion='" + posicion + '\'' +
                 ", nCamiseta=" + nCamiseta +

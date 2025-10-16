@@ -92,8 +92,13 @@ public class Partidos {
 
     public boolean agregarEstadisticas (Jugadores jugador, Partidos partidos, int goles, int asistencias, int minutosJugados){
 
-        int nuevoId = estadisticas.size() + 1;
-        Estadisticas nuevo = new Estadisticas(nuevoId, jugador, partidos, goles, asistencias, minutosJugados);
+        int id = 1;
+
+        if(estadisticas.size() < 0) {
+
+            id = estadisticas.get(estadisticas.size() - 1).getIdEstadistica() + 1;
+        }
+        Estadisticas nuevo = new Estadisticas(id, jugador, partidos, goles, asistencias, minutosJugados);
 
         return estadisticas.add(nuevo);
     }
