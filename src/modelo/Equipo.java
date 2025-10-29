@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Equipos {
+public class Equipo {
 
     private int idEquipo;
     private String codigo; //CODIGO DE 3 LETRAS
     private String nombreEquipo;
-    private List<Jugadores> jugadores; //TIENEN MUCHOS JUGADORES
-    private Entrenadores entrenador;
+    private List<Jugador> jugadores; //TIENEN MUCHOS JUGADORES
+    private Entrenador entrenador;
 
-    public Equipos(int idEquipo, String codigo, String nombreEquipo, Entrenadores entrenador) {
+    public Equipo(int idEquipo, String codigo, String nombreEquipo, Entrenador entrenador) throws Exception {
+        this.setCodigo(codigo);
         this.idEquipo = idEquipo;
-        this.codigo = codigo;
         this.nombreEquipo = nombreEquipo;
         this.jugadores = new ArrayList<>();
         this.entrenador = entrenador;
@@ -32,7 +32,10 @@ public class Equipos {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(String codigo) throws Exception {
+
+        if(!codigo.matches("^[A-Z]{3}$")) throw new Exception("ERROR, codigo invalido");
+
         this.codigo = codigo;
     }
 
@@ -44,27 +47,27 @@ public class Equipos {
         this.nombreEquipo = nombreEquipo;
     }
 
-    public List<Jugadores> getJugadores() {
+    public List<Jugador> getJugadores() {
         return jugadores;
     }
 
-    public void setJugadores(List<Jugadores> jugadores) {
+    public void setJugadores(List<Jugador> jugadores) {
         this.jugadores = jugadores;
     }
 
-    public Entrenadores getEntrenador() {
+    public Entrenador getEntrenador() {
         return entrenador;
     }
 
-    public void setEntrenador(Entrenadores entrenador) {
+    public void setEntrenador(Entrenador entrenador) {
         this.entrenador = entrenador;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Equipos equipos = (Equipos) o;
-        return idEquipo == equipos.idEquipo && Objects.equals(codigo, equipos.codigo) && Objects.equals(nombreEquipo, equipos.nombreEquipo) && Objects.equals(jugadores, equipos.jugadores) && Objects.equals(entrenador, equipos.entrenador);
+        Equipo equipo = (Equipo) o;
+        return idEquipo == equipo.idEquipo && Objects.equals(codigo, equipo.codigo) && Objects.equals(nombreEquipo, equipo.nombreEquipo) && Objects.equals(jugadores, equipo.jugadores) && Objects.equals(entrenador, equipo.entrenador);
     }
 
     @Override
@@ -77,4 +80,22 @@ public class Equipos {
                 ", entrenador=" + entrenador +
                 '}';
     }
+
+    public boolean agregarJugadorEquipo (Jugador jugador) throws Exception{
+
+       if(jugadores.contains(jugador))throw  new Exception("El equipo ya contiene a ese jugador");
+
+       return jugadores.add(jugador);
+    }
+
+
+    public boolean eliminarJugadorEquipo (Jugador jugador) throws Exception{
+
+        if(!jugadores.contains(jugador))throw  new Exception("El equipo NO contiene a ese jugador");
+
+        return jugadores.remove(jugador);
+    }
+
+
+
 }

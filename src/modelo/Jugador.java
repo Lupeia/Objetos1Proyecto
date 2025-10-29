@@ -3,14 +3,14 @@ package modelo;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Jugadores extends Persona {
+public class Jugador extends Persona {
 
     private float estatura;
     private float peso;
     private String posicion;
     private int nCamiseta;
 
-    public Jugadores(int id, String nombre, String apellido, long dni, LocalDate fechaNacimiento,float estatura, float peso, String posicion, int nCamiseta) {
+    public Jugador(int id, String nombre, String apellido, long dni, LocalDate fechaNacimiento, float estatura, float peso, String posicion, int nCamiseta) {
         super(id, nombre, apellido, dni, fechaNacimiento);
         this.estatura = estatura;
         this.peso = peso;
@@ -54,8 +54,8 @@ public class Jugadores extends Persona {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Jugadores jugadores = (Jugadores) o;
-        return Float.compare(estatura, jugadores.estatura) == 0 && Float.compare(peso, jugadores.peso) == 0 && nCamiseta == jugadores.nCamiseta && Objects.equals(posicion, jugadores.posicion);
+        Jugador jugador = (Jugador) o;
+        return Float.compare(estatura, jugador.estatura) == 0 && Float.compare(peso, jugador.peso) == 0 && nCamiseta == jugador.nCamiseta && Objects.equals(posicion, jugador.posicion);
     }
 
     @Override

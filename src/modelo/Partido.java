@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Partidos {
+public class Partido {
 
     private int idPartidos;
     private LocalDate fecha;
-    private Equipos equipoLocal;
-    private Equipos equipoVisitante;
+    private Equipo equipoLocal;
+    private Equipo equipoVisitante;
     private String estadio;
-    private List<Estadisticas> estadisticas;
+    private List<Estadistica> estadisticas;
 
-    public Partidos(int idPartidos, LocalDate fecha, Equipos equipoLocal, Equipos equipoVisitante, String estadio) {
+    public Partido(int idPartidos, LocalDate fecha, Equipo equipoLocal, Equipo equipoVisitante, String estadio) {
         this.idPartidos = idPartidos;
         this.fecha = fecha;
         this.equipoLocal = equipoLocal;
@@ -39,19 +39,19 @@ public class Partidos {
         this.fecha = fecha;
     }
 
-    public Equipos getEquipoLocal() {
+    public Equipo getEquipoLocal() {
         return equipoLocal;
     }
 
-    public void setEquipoLocal(Equipos equipoLocal) {
+    public void setEquipoLocal(Equipo equipoLocal) {
         this.equipoLocal = equipoLocal;
     }
 
-    public Equipos getEquipoVisitante() {
+    public Equipo getEquipoVisitante() {
         return equipoVisitante;
     }
 
-    public void setEquipoVisitante(Equipos equipoVisitante) {
+    public void setEquipoVisitante(Equipo equipoVisitante) {
         this.equipoVisitante = equipoVisitante;
     }
 
@@ -63,19 +63,19 @@ public class Partidos {
         this.estadio = estadio;
     }
 
-    public List<Estadisticas> getEstadisticas() {
+    public List<Estadistica> getEstadisticas() {
         return estadisticas;
     }
 
-    public void setEstadisticas(List<Estadisticas> estadisticas) {
+    public void setEstadisticas(List<Estadistica> estadisticas) {
         this.estadisticas = estadisticas;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Partidos partidos = (Partidos) o;
-        return idPartidos == partidos.idPartidos && Objects.equals(fecha, partidos.fecha) && Objects.equals(equipoLocal, partidos.equipoLocal) && Objects.equals(equipoVisitante, partidos.equipoVisitante) && Objects.equals(estadio, partidos.estadio) && Objects.equals(estadisticas, partidos.estadisticas);
+        Partido partido = (Partido) o;
+        return idPartidos == partido.idPartidos && Objects.equals(fecha, partido.fecha) && Objects.equals(equipoLocal, partido.equipoLocal) && Objects.equals(equipoVisitante, partido.equipoVisitante) && Objects.equals(estadio, partido.estadio) && Objects.equals(estadisticas, partido.estadisticas);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class Partidos {
                 '}';
     }
 
-    public boolean agregarEstadisticas (Jugadores jugador, Partidos partidos, int goles, int asistencias, int minutosJugados){
+    public boolean agregarEstadisticas (Jugador jugador, Partido partido, int goles, int asistencias, int minutosJugados){
 
         int id = 1;
 
@@ -98,10 +98,44 @@ public class Partidos {
 
             id = estadisticas.get(estadisticas.size() - 1).getIdEstadistica() + 1;
         }
-        Estadisticas nuevo = new Estadisticas(id, jugador, partidos, goles, asistencias, minutosJugados);
+        Estadistica nuevo = new Estadistica(id, jugador, partido, goles, asistencias, minutosJugados);
 
         return estadisticas.add(nuevo);
     }
+
+
+    public Estadistica traerEstadistica (int id){
+
+        int indice =  0;
+        boolean encontrado = false;
+        Estadistica buscado = null;
+
+
+        while (indice < estadisticas.size() && !encontrado){
+
+            if(estadisticas.get(indice).getIdEstadistica() == id){
+                buscado = estadisticas.get(indice);
+                encontrado = true;
+            }
+
+            indice++;
+        }
+
+        return buscado;
+    }
+
+    public boolean eliminarEstadistica (int id){
+
+        Estadistica aEliminar = traerEstadistica(id);
+
+        if(aEliminar == null){
+            return false;
+        }
+
+        return estadisticas.remove(aEliminar);
+    }
+
+
 
 
 }

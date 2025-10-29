@@ -1,17 +1,19 @@
 package modelo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Estadisticas {
+public class Estadistica {
 
     private int idEstadistica;
-    private Jugadores jugador;
-    private Partidos partido;
+    private Jugador jugador;
+    private Partido partido;
     private int goles;
     private int asistencias;
     private int minutosJugados;
 
-    public Estadisticas(int idEstadistica, Jugadores jugador, Partidos partido, int goles, int asistencias, int minutosJugados) {
+    public Estadistica(int idEstadistica, Jugador jugador, Partido partido, int goles, int asistencias, int minutosJugados) {
         this.idEstadistica = idEstadistica;
         this.jugador = jugador;
         this.partido = partido;
@@ -28,19 +30,19 @@ public class Estadisticas {
         this.idEstadistica = idEstadistica;
     }
 
-    public Jugadores getJugador() {
+    public Jugador getJugador() {
         return jugador;
     }
 
-    public void setJugador(Jugadores jugador) {
+    public void setJugador(Jugador jugador) {
         this.jugador = jugador;
     }
 
-    public Partidos getPartido() {
+    public Partido getPartido() {
         return partido;
     }
 
-    public void setPartido(Partidos partido) {
+    public void setPartido(Partido partido) {
         this.partido = partido;
     }
 
@@ -71,7 +73,7 @@ public class Estadisticas {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Estadisticas that = (Estadisticas) o;
+        Estadistica that = (Estadistica) o;
         return idEstadistica == that.idEstadistica && goles == that.goles && asistencias == that.asistencias && minutosJugados == that.minutosJugados && Objects.equals(jugador, that.jugador) && Objects.equals(partido, that.partido);
     }
 
@@ -86,4 +88,7 @@ public class Estadisticas {
                 ", minutosJugados=" + minutosJugados +
                 '}';
     }
+
+
+
 }

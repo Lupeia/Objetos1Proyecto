@@ -2,11 +2,11 @@ package modelo;
 
 import java.time.LocalDate;
 
-public class Entrenadores extends Persona {
+public class Entrenador extends Persona {
 
     private int EstrategiaFavorita;
 
-    public Entrenadores(int id, String nombre, String apellido, long dni, LocalDate fechaNacimiento, int estrategiaFavorita) {
+    public Entrenador(int id, String nombre, String apellido, long dni, LocalDate fechaNacimiento, int estrategiaFavorita) {
         super(id, nombre, apellido, dni, fechaNacimiento);
         EstrategiaFavorita = estrategiaFavorita;
     }
@@ -23,7 +23,7 @@ public class Entrenadores extends Persona {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Entrenadores that = (Entrenadores) o;
+        Entrenador that = (Entrenador) o;
         return EstrategiaFavorita == that.EstrategiaFavorita;
     }
 
