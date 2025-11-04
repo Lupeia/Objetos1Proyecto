@@ -305,7 +305,6 @@ public class Sistema {
 
     }
 
-
     public boolean eliminarPartido(int idPartido) {
 
         Partido aEliminar = traerPartido(idPartido);
@@ -316,6 +315,115 @@ public class Sistema {
         }
         return partidos.remove(aEliminar);
     }
+
+    // ____________________________________________________________
+
+//EJERCICIOS DE TIZI
+
+    public List<Jugador> traer(LocalDate fecha1, LocalDate fecha2){
+        List<modelo.Jugador> resultado = new ArrayList<modelo.Jugador>();
+
+        for(modelo.Jugador j : jugadores){
+            if(j.getFechaNacimiento().isAfter(fecha1) && j.getFechaNacimiento().isBefore(fecha2)) {
+                resultado.add(j);
+            }
+        }
+
+        return resultado;
+
+    }
+
+    public List<Equipo> traerequiposfecha(LocalDate fecha){
+        List<Equipo> resultado = new ArrayList<Equipo>();
+
+        for(Equipo e : equipos){
+            if(e.getFechaFundacion().isBefore(fecha)){
+                resultado.add(e);
+            }
+        }
+        return resultado;
+
+    }
+
+
+    public int calculoGoles(Jugador j){
+        int resultado = 0;
+
+        for(Partido p : partidos){
+            for(Estadistica e : p.getEstadisticas()){
+                if(e.getJugador().equals(j)){
+                    resultado += e.getGoles();
+                }
+            }
+        }
+
+        return resultado;
+
+    }
+
+    public int calculoAsistencia(Jugador j){
+        int resultado = 0;
+
+        for(Partido p : partidos){
+            for(Estadistica e : p.getEstadisticas()){
+                if(e.getJugador().equals(j)){
+                    resultado += e.getAsistencias();
+                }
+            }
+        }
+
+        return resultado;
+    }
+
+//FIN EJERCICIOS DE TIZI
+
+// ____________________________________________________________
+    //EJERCICIOS LUCAS
+
+    public double calcularalturaequipo(Equipo equipo){
+        double altura = 0;
+        int total = 0;
+
+        for(Equipo e : equipos){
+            if(e.getIdEquipo()==equipo.getIdEquipo()){
+                for(Jugador j : jugadores){
+                    altura += j.getEstatura();
+                    total += 1;
+                }
+            }
+        }
+
+
+        return altura / total;
+
+    }
+
+    public Equipo calcularalturaequipos(){
+        double altura = 0;
+        double mayorAltura = 0;
+        int cont = 0;
+        Equipo resultado = null;
+
+        for(Equipo e: equipos){
+            altura = calcularalturaequipo(e);
+            if(cont == 0){
+                mayorAltura = altura;
+                resultado = e;
+            }else{
+                if(altura>mayorAltura){
+                    mayorAltura = altura;
+                    resultado = e;
+                }
+            }
+            cont++;
+        }
+
+        return resultado;
+    }
+
+    //FIN EJERCICIOS LUCAS
+
+// ____________________________________________________________
 
     //Agregamos como subClase
 
@@ -388,62 +496,7 @@ public class Sistema {
 
     }
 
-    public List<Jugador> traer(LocalDate fecha1, LocalDate fecha2){
-        List<Jugador> resultado = new ArrayList<Jugador>();
-
-        for(Jugador j : jugadores){
-            if(j.getFechaNacimiento().isAfter(fecha1) && j.getFechaNacimiento().isBefore(fecha2)) {
-                resultado.add(j);
-            }
-        }
-
-        return resultado;
-
-    }
-
-    public List<Equipo> traerequiposfecha(LocalDate fecha){
-        List<Equipo> resultado = new ArrayList<Equipo>();
-
-        for(Equipo e : equipos){
-            if(e.getFechaFundacion().isBefore(fecha)){
-                resultado.add(e);
-            }
-        }
-        return resultado;
-
-    }
-
-
-    public int calculoGoles(Jugador j){
-        int resultado = 0;
-
-        for(Partido p : partidos){
-            for(Estadistica e : p.getEstadisticas()){
-                if(e.getJugador().equals(j)){
-                    resultado += e.getGoles();
-                }
-            }
-        }
-
-        return resultado;
-
-    }
-
-    public int calculoAsistencia(Jugador j){
-        int resultado = 0;
-
-        for(Partido p : partidos){
-            for(Estadistica e : p.getEstadisticas()){
-                if(e.getJugador().equals(j)){
-                    resultado += e.getAsistencias();
-                }
-            }
-        }
-
-        return resultado;
-    }
-
-
+    //EJERCICIOS IAN
     //subclase ganador
 
     public class Ganador{
