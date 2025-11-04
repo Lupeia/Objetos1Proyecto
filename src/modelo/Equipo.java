@@ -1,5 +1,6 @@
 package modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,13 +12,15 @@ public class Equipo {
     private String nombreEquipo;
     private List<Jugador> jugadores; //TIENEN MUCHOS JUGADORES
     private Entrenador entrenador;
+    private LocalDate fechaFundacion;
 
-    public Equipo(int idEquipo, String codigo, String nombreEquipo, Entrenador entrenador) throws Exception {
+    public Equipo(int idEquipo, String codigo, String nombreEquipo, Entrenador entrenador, LocalDate fechaFundacion) throws Exception {
         this.setCodigo(codigo);
         this.idEquipo = idEquipo;
         this.nombreEquipo = nombreEquipo;
         this.jugadores = new ArrayList<>();
         this.entrenador = entrenador;
+        this.fechaFundacion = fechaFundacion;
     }
 
     public int getIdEquipo() {
@@ -63,21 +66,30 @@ public class Equipo {
         this.entrenador = entrenador;
     }
 
+    public LocalDate getFechaFundacion() {
+        return fechaFundacion;
+    }
+
+    public void setFechaFundacion(LocalDate fechaFundacion) {
+        this.fechaFundacion = fechaFundacion;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Equipo equipo = (Equipo) o;
-        return idEquipo == equipo.idEquipo && Objects.equals(codigo, equipo.codigo) && Objects.equals(nombreEquipo, equipo.nombreEquipo) && Objects.equals(jugadores, equipo.jugadores) && Objects.equals(entrenador, equipo.entrenador);
+        return idEquipo == equipo.idEquipo && Objects.equals(codigo, equipo.codigo) && Objects.equals(nombreEquipo, equipo.nombreEquipo) && Objects.equals(jugadores, equipo.jugadores) && Objects.equals(entrenador, equipo.entrenador) && Objects.equals(fechaFundacion, equipo.fechaFundacion);
     }
 
     @Override
     public String toString() {
-        return "Equipos{" +
+        return "Equipo{" +
                 "idEquipo=" + idEquipo +
                 ", codigo='" + codigo + '\'' +
                 ", nombreEquipo='" + nombreEquipo + '\'' +
                 ", jugadores=" + jugadores +
                 ", entrenador=" + entrenador +
+                ", fechaFundacion=" + fechaFundacion +
                 '}';
     }
 

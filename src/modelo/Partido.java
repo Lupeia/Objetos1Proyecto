@@ -13,14 +13,17 @@ public class Partido {
     private Equipo equipoVisitante;
     private String estadio;
     private List<Estadistica> estadisticas;
+    private String resultado;
 
-    public Partido(int idPartidos, LocalDate fecha, Equipo equipoLocal, Equipo equipoVisitante, String estadio) {
+
+    public Partido(int idPartidos, LocalDate fecha, Equipo equipoLocal, Equipo equipoVisitante, String estadio, String resultado) {
         this.idPartidos = idPartidos;
         this.fecha = fecha;
         this.equipoLocal = equipoLocal;
         this.equipoVisitante = equipoVisitante;
         this.estadio = estadio;
         this.estadisticas = new ArrayList<>();
+        this.resultado=resultado;
     }
 
     public int getIdPartidos() {
@@ -71,22 +74,29 @@ public class Partido {
         this.estadisticas = estadisticas;
     }
 
+    public String getResultado() {return resultado;}
+
+    public void setResultado(String resultado) {this.resultado = resultado;}
+
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Partido partido = (Partido) o;
-        return idPartidos == partido.idPartidos && Objects.equals(fecha, partido.fecha) && Objects.equals(equipoLocal, partido.equipoLocal) && Objects.equals(equipoVisitante, partido.equipoVisitante) && Objects.equals(estadio, partido.estadio) && Objects.equals(estadisticas, partido.estadisticas);
+        return idPartidos == partido.idPartidos && Objects.equals(fecha, partido.fecha) && Objects.equals(equipoLocal, partido.equipoLocal) && Objects.equals(equipoVisitante, partido.equipoVisitante) && Objects.equals(estadio, partido.estadio) && Objects.equals(estadisticas, partido.estadisticas) && Objects.equals(resultado, partido.resultado);
     }
+
 
     @Override
     public String toString() {
-        return "Partidos{" +
+        return "Partido{" +
                 "idPartidos=" + idPartidos +
                 ", fecha=" + fecha +
                 ", equipoLocal=" + equipoLocal +
                 ", equipoVisitante=" + equipoVisitante +
                 ", estadio='" + estadio + '\'' +
                 ", estadisticas=" + estadisticas +
+                ", resultado='" + resultado + '\'' +
                 '}';
     }
 
