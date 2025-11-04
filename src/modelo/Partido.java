@@ -1,6 +1,8 @@
 package modelo;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -9,6 +11,7 @@ public class Partido {
 
     private int idPartidos;
     private LocalDate fecha;
+    private LocalTime hora;
     private Equipo equipoLocal;
     private Equipo equipoVisitante;
     private String estadio;
@@ -16,9 +19,10 @@ public class Partido {
     private String resultado;
 
 
-    public Partido(int idPartidos, LocalDate fecha, Equipo equipoLocal, Equipo equipoVisitante, String estadio, String resultado) {
+    public Partido(int idPartidos, LocalDate fecha, LocalTime hora, Equipo equipoLocal, Equipo equipoVisitante, String estadio, String resultado) {
         this.idPartidos = idPartidos;
         this.fecha = fecha;
+        this.hora = hora;
         this.equipoLocal = equipoLocal;
         this.equipoVisitante = equipoVisitante;
         this.estadio = estadio;
@@ -40,6 +44,14 @@ public class Partido {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
     }
 
     public Equipo getEquipoLocal() {
@@ -86,29 +98,21 @@ public class Partido {
         return idPartidos == partido.idPartidos && Objects.equals(fecha, partido.fecha) && Objects.equals(equipoLocal, partido.equipoLocal) && Objects.equals(equipoVisitante, partido.equipoVisitante) && Objects.equals(estadio, partido.estadio) && Objects.equals(estadisticas, partido.estadisticas) && Objects.equals(resultado, partido.resultado);
     }
 
-
     @Override
     public String toString() {
-        return "Partido{" +
-                "idPartidos=" + idPartidos +
-                ", fecha=" + fecha +
-                ", equipoLocal=" + equipoLocal +
-                ", equipoVisitante=" + equipoVisitante +
-                ", estadio='" + estadio + '\'' +
-                ", estadisticas=" + estadisticas +
-                ", resultado='" + resultado + '\'' +
-                '}';
+        return "Partido [idPartidos=" + idPartidos + ", fecha=" + fecha + ", horario=" + hora + ", Local="
+                + equipoLocal.getNombreEquipo() + ", Visitante=" + equipoVisitante.getNombreEquipo() +", "+ "resultado=" + resultado + "]\n";
     }
 
-    public boolean agregarEstadisticas (Jugador jugador, Partido partido, int goles, int asistencias, int minutosJugados){
+    public boolean agregarEstadisticas (Jugador jugador, Equipo equipo,  Partido partido, int goles, int asistencias, int minutosJugados){
 
         int id = 1;
 
-        if(estadisticas.size() < 0) {
+        if(estadisticas.size() > 0) {
 
             id = estadisticas.get(estadisticas.size() - 1).getIdEstadistica() + 1;
         }
-        Estadistica nuevo = new Estadistica(id, jugador, partido, goles, asistencias, minutosJugados);
+        Estadistica nuevo = new Estadistica(id, jugador,equipo, partido, goles, asistencias, minutosJugados);
 
         return estadisticas.add(nuevo);
     }

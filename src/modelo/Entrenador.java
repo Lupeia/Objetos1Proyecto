@@ -1,21 +1,22 @@
 package modelo;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Entrenador extends Persona {
 
-    private int EstrategiaFavorita;
+    private String EstrategiaFavorita;
 
-    public Entrenador(int id, String nombre, String apellido, long dni, LocalDate fechaNacimiento, int estrategiaFavorita) {
+    public Entrenador(int id, String nombre, String apellido, long dni, LocalDate fechaNacimiento, String estrategiaFavorita) {
         super(id, nombre, apellido, dni, fechaNacimiento);
         EstrategiaFavorita = estrategiaFavorita;
     }
 
-    public int getEstrategiaFavorita() {
+    public String getEstrategiaFavorita() {
         return EstrategiaFavorita;
     }
 
-    public void setEstrategiaFavorita(int estrategiaFavorita) {
+    public void setEstrategiaFavorita(String estrategiaFavorita) {
         EstrategiaFavorita = estrategiaFavorita;
     }
 
@@ -24,13 +25,13 @@ public class Entrenador extends Persona {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Entrenador that = (Entrenador) o;
-        return EstrategiaFavorita == that.EstrategiaFavorita;
+        return Objects.equals(EstrategiaFavorita, that.EstrategiaFavorita);
     }
 
     @Override
     public String toString() {
-        return "Entrenadores{" +
-                "EstrategiaFavorita=" + EstrategiaFavorita +
+        return "Entrenador{" +
+                "EstrategiaFavorita='" + EstrategiaFavorita + '\'' +
                 '}';
     }
 }

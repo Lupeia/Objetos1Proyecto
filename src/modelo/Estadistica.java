@@ -9,13 +9,15 @@ public class Estadistica {
     private int idEstadistica;
     private Jugador jugador;
     private Partido partido;
+    private Equipo equipo;
     private int goles;
     private int asistencias;
     private int minutosJugados;
 
-    public Estadistica(int idEstadistica, Jugador jugador, Partido partido, int goles, int asistencias, int minutosJugados) {
+    public Estadistica(int idEstadistica, Jugador jugador,  Equipo equipo,  Partido partido, int goles, int asistencias, int minutosJugados) {
         this.idEstadistica = idEstadistica;
         this.jugador = jugador;
+        this.equipo = equipo;
         this.partido = partido;
         this.goles = goles;
         this.asistencias = asistencias;
@@ -46,6 +48,14 @@ public class Estadistica {
         this.partido = partido;
     }
 
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
+    }
+
     public int getGoles() {
         return goles;
     }
@@ -74,21 +84,14 @@ public class Estadistica {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Estadistica that = (Estadistica) o;
-        return idEstadistica == that.idEstadistica && goles == that.goles && asistencias == that.asistencias && minutosJugados == that.minutosJugados && Objects.equals(jugador, that.jugador) && Objects.equals(partido, that.partido);
+        return idEstadistica == that.idEstadistica && goles == that.goles && asistencias == that.asistencias && minutosJugados == that.minutosJugados && Objects.equals(jugador, that.jugador) && Objects.equals(partido, that.partido) && Objects.equals(equipo, that.equipo);
     }
 
     @Override
     public String toString() {
-        return "Estadisticas{" +
-                "idEstadistica=" + idEstadistica +
-                ", jugador=" + jugador +
-                ", partido=" + partido +
-                ", goles=" + goles +
-                ", asistencias=" + asistencias +
-                ", minutosJugados=" + minutosJugados +
-                '}';
+        return "Estadistica [idEstadistica=" + idEstadistica + ", jugador=" + jugador.getNombre() +" "+jugador.getApellido()+ ", equipo=" + equipo.getNombreEquipo()
+                + ", partido=" + partido.getFecha()+" "+partido.getHora()+" "+ partido.getEquipoLocal().getNombreEquipo()+" "+ partido.getResultado()+" "+partido.getEquipoVisitante().getNombreEquipo()+ ", goles=" + goles + ", asistencias=" + asistencias + ", minutosJugados="
+                + minutosJugados + "]";
     }
-
-
 
 }

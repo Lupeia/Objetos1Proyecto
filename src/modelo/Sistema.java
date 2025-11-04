@@ -1,6 +1,7 @@
 package modelo;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class Sistema {
         this.equipos = new ArrayList<>();
         this.jugadores = new ArrayList<>();
         this.entrenadores = new ArrayList<>();
+        this.partidos = new ArrayList<>();
     }
 
     public List<Torneo> getTorneo() {
@@ -51,6 +53,13 @@ public class Sistema {
         this.entrenadores = entrenadors;
     }
 
+    public List<Partido> getPartidos() {
+        return partidos;
+    }
+
+    public void setPartidos(List<Partido> partidos) {
+        this.partidos = partidos;
+    }
 
     public boolean crearJugador(String nombre, String apellido, long dni, LocalDate fechaNacimiento,
                                 float estatura, float peso, String posicion, int numeroCamiseta) throws Exception {
@@ -67,9 +76,9 @@ public class Sistema {
 
         int id = 1;
 
-        if (jugadores.size() < 0) {
+        if (jugadores.size() > 0) {
 
-            id = jugadores.get(jugadores.size() - 1).getId();
+            id = jugadores.get(jugadores.size() - 1).getId() + 1 ;
 
         }
 
@@ -115,7 +124,7 @@ public class Sistema {
 
 
     public boolean crearEntrenador(String nombre, String apellido, long dni, LocalDate fechaNacimiento,
-                                   int EstrategiaFavorita) throws Exception {
+                                   String EstrategiaFavorita) throws Exception {
 
         //AGREGAR VALIDACION DE DNIS PARA QUE NO HAYA ENTRENADORES CON DNIS DUPLICADOS
         // "Ya es un entrenador"
@@ -129,7 +138,7 @@ public class Sistema {
 
         int id = 1;
 
-        if (entrenadores.size() < 0) {
+        if (entrenadores.size() > 0) {
 
 
             id = entrenadores.get(entrenadores.size() - 1).getId() + 1;
@@ -180,7 +189,7 @@ public class Sistema {
 
         int id = 1;
 
-        if (equipos.size() < 0) {
+        if (equipos.size() > 0) {
 
             id = equipos.get(equipos.size() - 1).getIdEquipo() + 1;
 
@@ -211,7 +220,7 @@ public class Sistema {
         boolean encontrado = false;
         Equipo buscado = null;
 
-        while (indice < entrenadores.size() && !encontrado) {
+        while (indice < equipos.size() && !encontrado) {
 
             if (equipos.get(indice).getIdEquipo() == idEquipos) {
 
@@ -230,9 +239,13 @@ public class Sistema {
 
     public boolean agregarTorneo(String nombre, String temporada, LocalDate fechaIncio, LocalDate fechafin) {
 
-        int nuevoId = torneo.size() + 1;
-        Torneo nuevo = new Torneo(nuevoId, nombre, temporada, fechaIncio, fechafin);
+        int id = 1;
 
+        if(torneo.size() > 0) {
+
+            id = torneo.get(torneo.size() - 1).getIdTorneo() + 1;
+        }
+        Torneo nuevo = new Torneo(id, nombre, temporada, fechaIncio, fechafin);
         return torneo.add(nuevo);
 
     }
@@ -273,10 +286,16 @@ public class Sistema {
     }
 
 
-    public boolean agregarPartidos(LocalDate fecha, Equipo local, Equipo visitante, String estadio, String resultado) {
+    public boolean agregarPartidos(LocalDate fecha, LocalTime hora, Equipo local, Equipo visitante, String estadio, String resultado) {
 
-        int idNuevo = partidos.size() + 1;
-        Partido nuevo = new Partido(idNuevo, fecha, local, visitante, estadio, resultado);
+        int id = 1;
+
+        if(partidos.size() > 0) {
+
+            id = partidos.get(partidos.size()-1).getIdPartidos() +1;
+
+        }
+        Partido nuevo = new Partido(id, fecha, hora,  local, visitante, estadio, resultado);
 
         return partidos.add(nuevo);
 
@@ -567,10 +586,10 @@ public class Sistema {
         return equiposGanadores;
     }
 
-    public List<Entrenador> traerEntrenadorPorTactica(int estrategiaFavorita){
+    public List<Entrenador> traerEntrenadorPorTactica(String estrategiaFavorita){
         List<Entrenador> entrenadoresTactica = new ArrayList<Entrenador>();
         for(Entrenador e:entrenadores) {
-            if(e.getEstrategiaFavorita()==estrategiaFavorita) {
+            if(e.getEstrategiaFavorita().equals(estrategiaFavorita)) {
                 entrenadoresTactica.add(e);
             }
         }

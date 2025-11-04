@@ -131,11 +131,45 @@ public class Torneo {
 
     }
 
+    public Equipo traerEquipo(int idEquipos) {
+
+        int indice = 0;
+        boolean encontrado = false;
+        Equipo buscado = null;
+
+        while (indice < equipoParticipantes.size() && !encontrado) {
+
+            if (equipoParticipantes.get(indice).getIdEquipo() == idEquipos) {
+
+                buscado = equipoParticipantes.get(indice);
+                encontrado = true;
+
+            }
+
+            indice++;
+
+        }
+
+        return buscado;
+
+    }
 
 
+    public Partido traerPartido(int id) {
 
-
-
+        int i=0;
+        Partido partidoBuscado= null;
+        boolean encontrado=false;
+        while(i<partidosTorneos.size()&&!encontrado) {
+            Partido p=partidosTorneos.get(i);
+            if(p.getIdPartidos()==id) {
+                partidoBuscado=p;
+                encontrado=true;
+            }
+            i++;
+        }
+        return partidoBuscado;
+    }
 
 
 
