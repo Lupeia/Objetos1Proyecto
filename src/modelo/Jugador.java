@@ -60,11 +60,14 @@ public class Jugador extends Persona {
 
     @Override
     public String toString() {
-        return "Jugadores{" +
-                "estatura=" + estatura +
+        return "\nJugadores{" +
+                nombre+" " +apellido +
+                " estatura=" + estatura +
                 ", peso=" + peso +
                 ", posicion='" + posicion + '\'' +
                 ", nCamiseta=" + nCamiseta +
+                " Nacido: "+fechaNacimiento+
                 '}';
     }
+
 }

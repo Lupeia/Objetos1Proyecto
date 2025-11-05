@@ -89,18 +89,27 @@ public class Torneo {
 
     @Override
     public String toString() {
-        return "Torneos{" +
-                "idTorneo=" + idTorneo +
-                ", nombre='" + nombre + '\'' +
-                ", temporada='" + temporada + '\'' +
-                ", fechaInicio=" + fechaInicio +
-                ", fechaFin=" + fechaFin +
-                ", equiposParticipantes=" + equipoParticipantes +
-                ", partidos=" + partidosTorneos +
-                '}';
+        return " Torneo:"  + nombre + "\n" +
+                "• ID: " + idTorneo + "\n" +
+                "• Código: " + String.format("T%03d", idTorneo) + "\n" +
+                "• Nombre: " + nombre + "\n" +
+                "• Temporada: " + temporada + "\n" +
+                "• Fecha inicio: " + fechaInicio + "\n" +
+                "• Fecha fin: " + fechaFin + "\n" +
+                (equipoParticipantes == null || equipoParticipantes.isEmpty()
+                        ? "• Participantes: sin equipos registrados\n"
+                        : "• Participantes: " + equipoParticipantes.size() + " equipos (" +
+                        equipoParticipantes.stream()
+                                .map(Equipo::getNombreEquipo)
+                                .reduce((a, b) -> a + ", " + b).orElse("") +
+                        ")\n") +
+                (partidosTorneos == null || partidosTorneos.isEmpty()
+                        ? "• Partidos: sin partidos cargados"
+                        : "• Partidos: todos contra todos (" + partidosTorneos.size() + " partidos en total)");
     }
 
-   public boolean agregarPartidoTorneo (Partido partido) throws Exception{
+
+    public boolean agregarPartidoTorneo (Partido partido) throws Exception{
 
        if(partidosTorneos.contains(partido)) throw new Exception("El partido ya esta agregado en torneo");
 

@@ -42,7 +42,7 @@ public class TestSistema {
             sistema.crearJugador("Enzo", "Correa", 51632497, LocalDate.of(2002, 3, 28), 1.78f, 74f, "defensor", 5);
             //sistema.getJugadores().forEach(System.out::println);
 
-            System.out.println(sistema.getJugadores() + "\n");
+            //System.out.println(sistema.getJugadores() + "\n");
 
             sistema.crearEntrenador("Carlos", "Gomez", 12345678, LocalDate.of(1989, 5, 5), "4-4-2");
             sistema.crearEntrenador("Luis", "Martinez", 22345678, LocalDate.of(1990, 10, 14), "4-3-3");
@@ -55,15 +55,23 @@ public class TestSistema {
             sistema.agregarEquipo("HAL", "Halcones", sistema.traerEntrenador(3),LocalDate.of(2015, 7, 20));
             sistema.agregarEquipo("LOB", "Lobos", sistema.traerEntrenador(4),LocalDate.of(2013, 9, 5));
 
+
             sistema.traerTorneos(1).agregarEquiposParticipantes(sistema.traerEquipos(1));
+
             sistema.traerTorneos(1).agregarEquiposParticipantes(sistema.traerEquipos(2));
+
             sistema.traerTorneos(1).agregarEquiposParticipantes(sistema.traerEquipos(3));
+
             sistema.traerTorneos(1).agregarEquiposParticipantes(sistema.traerEquipos(4));
 
             sistema.traerEquipos(1).agregarJugadorEquipo(sistema.traerJugador(1));
+
             sistema.traerEquipos(1).agregarJugadorEquipo(sistema.traerJugador(2));
+
             sistema.traerEquipos(1).agregarJugadorEquipo(sistema.traerJugador(3));
+
             sistema.traerEquipos(1).agregarJugadorEquipo(sistema.traerJugador(4));
+
             sistema.traerEquipos(1).agregarJugadorEquipo(sistema.traerJugador(5));
 
 
@@ -93,12 +101,17 @@ public class TestSistema {
             sistema.agregarPartidos(LocalDate.of(2025, 10, 7), LocalTime.of(15, 30), sistema.traerTorneos(1).traerEquipo(1), sistema.traerTorneos(1).traerEquipo(4), "Anfield", "1-3");
             sistema.agregarPartidos(LocalDate.of(2025, 10, 14), LocalTime.of(15, 30), sistema.traerTorneos(1).traerEquipo(2), sistema.traerTorneos(1).traerEquipo(3), "La Bombonera", "2-2");
 
+            System.out.println(sistema.traerTorneos(1));
+
             sistema.traerTorneos(1).agregarPartidoTorneo(sistema.traerPartido(1));
             sistema.traerTorneos(1).agregarPartidoTorneo(sistema.traerPartido(2));
             sistema.traerTorneos(1).agregarPartidoTorneo(sistema.traerPartido(3));
             sistema.traerTorneos(1).agregarPartidoTorneo(sistema.traerPartido(4));
             sistema.traerTorneos(1).agregarPartidoTorneo(sistema.traerPartido(5));
             sistema.traerTorneos(1).agregarPartidoTorneo(sistema.traerPartido(6));
+
+            System.out.println(sistema.traerTorneos(1).getEquiposParticipantes());
+
             System.out.println(sistema.traerTorneos(1).getPartidos());
 
             sistema.traerPartido(1).agregarEstadisticas(sistema.traerJugador(1),sistema.traerTorneos(1).traerEquipo(1), sistema.traerTorneos(1).traerPartido(1), 1, 0, 90);
@@ -118,7 +131,17 @@ public class TestSistema {
             sistema.traerPartido(6).agregarEstadisticas(sistema.traerJugador(13),sistema.traerTorneos(1).traerEquipo(3), sistema.traerTorneos(1).traerPartido(6), 1, 0, 85);
             sistema.traerPartido(6).agregarEstadisticas(sistema.traerJugador(14),sistema.traerTorneos(1).traerEquipo(3), sistema.traerTorneos(1).traerPartido(6), 1, 0, 90);
 
+
+
             System.out.println(sistema.traerTorneos(1).traerPartido(1).getEstadisticas());
+            System.out.println(sistema.traerTorneos(1).traerPartido(2).getEstadisticas());
+            System.out.println(sistema.traerTorneos(1).traerPartido(3).getEstadisticas());
+            System.out.println(sistema.traerTorneos(1).traerPartido(4).getEstadisticas());
+            System.out.println(sistema.traerTorneos(1).traerPartido(5).getEstadisticas());
+            System.out.println(sistema.traerTorneos(1).traerPartido(6).getEstadisticas());
+
+            System.out.println("Posiciones\n"+sistema.generarTablaPosiciones(sistema.traerTorneos(1)));
+            System.out.println("Goleadores\n"+sistema.generarTablaGoleadores());
 
 
         } catch (Exception e) {

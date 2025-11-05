@@ -89,9 +89,10 @@ public class Estadistica {
 
     @Override
     public String toString() {
-        return "Estadistica [idEstadistica=" + idEstadistica + ", jugador=" + jugador.getNombre() +" "+jugador.getApellido()+ ", equipo=" + equipo.getNombreEquipo()
+        return "\nEstadistica [idEstadistica=" + idEstadistica + ", jugador=" + jugador.getNombre() +" "+jugador.getApellido()+ ", equipo=" + equipo.getNombreEquipo()
                 + ", partido=" + partido.getFecha()+" "+partido.getHora()+" "+ partido.getEquipoLocal().getNombreEquipo()+" "+ partido.getResultado()+" "+partido.getEquipoVisitante().getNombreEquipo()+ ", goles=" + goles + ", asistencias=" + asistencias + ", minutosJugados="
                 + minutosJugados + "]";
     }
+
 
 }

@@ -469,10 +469,10 @@ public class Sistema {
 
         @Override
         public String toString() {
-            return jugador.getNombre() + " - " + golesTotales + " goles";
+            return jugador.getNombre() + " - " + golesTotales + " goles\n";
         }
 
-
+    }
         public List<Goleador> generarTablaGoleadores() {
             List<Goleador> tabla = new ArrayList<>();
 
@@ -513,7 +513,6 @@ public class Sistema {
             return tabla;
         }
 
-    }
 
     //EJERCICIOS IAN
     //subclase ganador
@@ -647,7 +646,7 @@ public class Sistema {
 
         @Override
         public String toString() {
-            return "Posicion [equipo=" + equipo.getNombreEquipo() + ", puntos=" + puntos + "]";
+            return "Posicion [equipo=" + equipo.getNombreEquipo() + ", puntos=" + puntos + "]\n";
         }
 
 
@@ -673,5 +672,59 @@ public class Sistema {
     }
 
 
+    public class Asistidor{
+        Jugador jugador;
+        int asistencias;
+
+        public Asistidor(Jugador jugador, int asistencias) {
+            super();
+            this.jugador = jugador;
+            this.asistencias = asistencias;
+        }
+
+        public Jugador getJugador() {
+            return jugador;
+        }
+
+        public void setJugador(Jugador jugador) {
+            this.jugador = jugador;
+        }
+
+        public int getAsistencias() {
+            return asistencias;
+        }
+
+        public void setAsistencias(int asistencias) {
+            this.asistencias = asistencias;
+        }
+
+        @Override
+        public String toString() {
+            return "Asistidor [jugador=" + jugador + ", asistencias=" + asistencias + "]";
+        }
+
+    }
+
+
+    public List<Asistidor> generarListaAsistidores(Torneo torneo){
+        List<Asistidor> tablaAsistidores = new ArrayList<>();
+        for(Equipo e:torneo.getEquiposParticipantes()) {
+            for(Jugador j:e.getJugadores()) {
+                int asistencias=calculoAsistencia(j);
+                tablaAsistidores.add(new Asistidor(j, asistencias));
+            }
+        }
+
+        for (int i = 0; i < tablaAsistidores.size() - 1; i++) {
+            for (int j = 0; j < tablaAsistidores.size() - i - 1; j++) {
+                if (tablaAsistidores.get(j).getAsistencias() < tablaAsistidores.get(j + 1).getAsistencias()) {
+                    Asistidor temp = tablaAsistidores.get(j);
+                    tablaAsistidores.set(j, tablaAsistidores.get(j + 1));
+                    tablaAsistidores.set(j + 1, temp);
+                }
+            }
+        }
+        return tablaAsistidores;
+    }
 
 }
